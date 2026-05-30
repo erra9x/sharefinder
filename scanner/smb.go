@@ -173,7 +173,7 @@ func (conn *Connection) CheckLocalAdmin() (bool, error) {
 		DatabaseName:  "ServicesActive",
 		DesiredAccess: msscmr.SCManagerCreateService,
 	}
-	reqBuf, err := req.MarshalBinary()
+	reqBuf, err := req.Marshal()
 	if err != nil {
 		return false, err
 	}
@@ -184,7 +184,7 @@ func (conn *Connection) CheckLocalAdmin() (bool, error) {
 	}
 
 	res := msscmr.ROpenSCManagerWRes{}
-	if err := res.UnmarshalBinary(buffer); err != nil {
+	if err := res.Unmarshal(buffer); err != nil {
 		return false, err
 	}
 
